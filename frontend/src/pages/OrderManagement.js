@@ -28,16 +28,13 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  Stepper,
-  Step,
-  StepLabel,
   Avatar,
   Tooltip,
-  Badge,
   Divider,
   Accordion,
   AccordionSummary,
-  AccordionDetails
+  AccordionDetails,
+  Snackbar
 } from '@mui/material';
 import {
   Add as AddIcon,
@@ -56,8 +53,8 @@ import {
   Timeline as TimelineIcon,
   Person as PersonIcon,
   LocationOn as LocationIcon,
-  Phone as PhoneIcon,
-  Receipt as ReceiptIcon
+  Receipt as ReceiptIcon,
+  CheckCircle as CheckCircleIcon
 } from '@mui/icons-material';
 import {
   orderService,
@@ -65,6 +62,7 @@ import {
   getOrderStatusName,
   getOrderStatusColor
 } from '../services/api';
+import CreateOrderDialog from '../components/CreateOrderDialog';
 
 const OrderManagement = () => {
   const [orders, setOrders] = useState([]);
@@ -73,20 +71,11 @@ const OrderManagement = () => {
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [createOrderOpen, setCreateOrderOpen] = useState(false);
+  const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
   const [filters, setFilters] = useState({
     status: '',
     customerEmail: '',
     search: ''
-  });
-
-  // Estados para crear nueva orden
-  const [newOrder, setNewOrder] = useState({
-    customer_name: '',
-    customer_email: '',
-    customer_cedula: '',
-    shipping_address: '',
-    notes: '',
-    items: []
   });
 
   const orderStatuses = [
@@ -147,6 +136,7 @@ const OrderManagement = () => {
       try {
         await orderService.deleteOrder(orderId);
         await loadOrders();
+        showSnackbar('Orden eliminada exitosamente', 'success');
       } catch (err) {
         setError(err.message);
       }
@@ -166,6 +156,20 @@ const OrderManagement = () => {
       customerEmail: '',
       search: ''
     });
+  };
+
+  const handleOrderCreated = (newOrder) => {
+    setOrders(prev => [newOrder, ...prev]);
+    showSnackbar(`Orden ${newOrder.order_number} creada exitosamente`, 'success');
+    loadOrders(); // Recargar para obtener datos actualizados
+  };
+
+  const showSnackbar = (message, severity = 'success') => {
+    setSnackbar({ open: true, message, severity });
+  };
+
+  const handleCloseSnackbar = () => {
+    setSnackbar({ open: false, message: '', severity: 'success' });
   };
 
   const getStatusIcon = (status) => {
@@ -536,15 +540,15 @@ const OrderManagement = () => {
                       Productos ({selectedOrder.items?.length || 0})
                     </Typography>
                     <TableContainer component={Paper} variant="outlined">
-                      <Table>
-                        <TableHead sx={{ bgcolor: 'grey.50' }}>
+                      <Table size="small">
+                        <TableHead>
                           <TableRow>
-                            <TableCell><strong>Producto</strong></TableCell>
-                            <TableCell align="center"><strong>Cantidad</strong></TableCell>
-                            <TableCell align="right"><strong>Precio Unit.</strong></TableCell>
-                            <TableCell align="right"><strong>Total</strong></TableCell>
-                            <TableCell align="center"><strong>Categoría SENAE</strong></TableCell>
-                            <TableCell align="center"><strong>Peso</strong></TableCell>
+                            <TableCell>Producto</TableCell>
+                            <TableCell align="center">Cantidad</TableCell>
+                            <TableCell align="right">Precio Unit.</TableCell>
+                            <TableCell align="right">Total</TableCell>
+                            <TableCell align="center">Categoría SENAE</TableCell>
+                            <TableCell align="center">Peso</TableCell>
                           </TableRow>
                         </TableHead>
                         <TableBody>
@@ -694,42 +698,29 @@ const OrderManagement = () => {
         )}
       </Dialog>
 
-      {/* Create Order Dialog - Placeholder */}
-      <Dialog
+      {/* Create Order Dialog */}
+      <CreateOrderDialog
         open={createOrderOpen}
         onClose={() => setCreateOrderOpen(false)}
-        maxWidth="md"
-        fullWidth
+        onOrderCreated={handleOrderCreated}
+      />
+
+      {/* Success/Error Snackbar */}
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       >
-        <DialogTitle>
-          <Typography variant="h5" fontWeight="bold">
-            📝 Crear Nueva Orden
-          </Typography>
-        </DialogTitle>
-        <DialogContent>
-          <Box sx={{ pt: 2 }}>
-            <Alert severity="info" sx={{ mb: 3 }}>
-              Funcionalidad de creación de órdenes en desarrollo.
-              Por ahora puedes gestionar las órdenes existentes.
-            </Alert>
-            <Typography variant="body1">
-              Esta funcionalidad incluirá:
-            </Typography>
-            <ul>
-              <li>Formulario de datos del cliente</li>
-              <li>Búsqueda y selección de productos</li>
-              <li>Cálculo automático de tarifas SENAE</li>
-              <li>Validación de categorías B, C, D</li>
-              <li>Generación automática de número de orden</li>
-            </ul>
-          </Box>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setCreateOrderOpen(false)}>
-            Cerrar
-          </Button>
-        </DialogActions>
-      </Dialog>
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity={snackbar.severity}
+          sx={{ width: '100%' }}
+          icon={snackbar.severity === 'success' ? <CheckCircleIcon /> : undefined}
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
 
       {/* Floating Action Button */}
       <Fab

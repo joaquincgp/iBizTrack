@@ -39,7 +39,7 @@ class AmazonService:
                 "price": 139.99,
                 "weight": 0.205,
                 "dimensions": {"length": 17.4, "width": 12.5, "height": 0.81},
-                "image_url": "https://images-na.ssl-images-amazon.com/images/I/71YAqiMWOWL._AC_SL1500_.jpg",
+                "image_url": "https://m.media-amazon.com/images/I/719ws-Z0IyL._AC_SX679_.jpg",
                 "category": "Electronics",
                 "description": "E-reader with adjustable warm light",
                 "availability": True
