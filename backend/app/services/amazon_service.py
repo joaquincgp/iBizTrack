@@ -17,7 +17,7 @@ class AmazonService:
                 "price": 49.99,
                 "weight": 0.34,
                 "dimensions": {"length": 10, "width": 10, "height": 9},
-                "image_url": "https://images-na.ssl-images-amazon.com/images/I/61YGlUkB2RL._AC_SL1000_.jpg",
+                "image_url": "https://m.media-amazon.com/images/I/71JB6hM6Z6L._AC_SX679_.jpg",
                 "category": "Electronics",
                 "description": "Smart speaker with Alexa voice control",
                 "availability": True
@@ -61,7 +61,7 @@ class AmazonService:
                 "price": 89.99,
                 "weight": 0.8,
                 "dimensions": {"length": 30, "width": 12, "height": 8},
-                "image_url": "https://images-na.ssl-images-amazon.com/images/I/81WoTgn0rQL._AC_SL1500_.jpg",
+                "image_url": "https://m.media-amazon.com/images/I/41jeqX2rAhL._AC_SY695_.jpg",
                 "category": "Footwear",
                 "description": "Classic athletic sneakers",
                 "availability": True
@@ -72,7 +72,7 @@ class AmazonService:
                 "price": 59.99,
                 "weight": 0.6,
                 "dimensions": {"length": 35, "width": 25, "height": 3},
-                "image_url": "https://images-na.ssl-images-amazon.com/images/I/71qV7VpNdBL._AC_SL1500_.jpg",
+                "image_url": "https://m.media-amazon.com/images/I/71njFOSKoyL._AC_SX679_.jpg",
                 "category": "Clothing",
                 "description": "Classic straight-leg jeans",
                 "availability": True
@@ -94,7 +94,7 @@ class AmazonService:
                 "price": 34.99,
                 "weight": 0.5,
                 "dimensions": {"length": 30, "width": 25, "height": 5},
-                "image_url": "https://images-na.ssl-images-amazon.com/images/I/71WXKqIJmHL._AC_SL1500_.jpg",
+                "image_url": "https://m.media-amazon.com/images/I/81H45R8GmcL._AC_SX679_.jpg",
                 "category": "Clothing",
                 "description": "Comfortable fleece hoodie",
                 "availability": True
@@ -105,7 +105,7 @@ class AmazonService:
                 "price": 79.99,
                 "weight": 5.3,
                 "dimensions": {"length": 33, "width": 31, "height": 32},
-                "image_url": "https://images-na.ssl-images-amazon.com/images/I/71nkqb1x%2BHL._AC_SL1500_.jpg",
+                "image_url": "https://m.media-amazon.com/images/I/71thcs5a-WL._AC_SX679_.jpg",
                 "category": "Kitchen",
                 "description": "Multi-use electric pressure cooker",
                 "availability": True
@@ -116,7 +116,7 @@ class AmazonService:
                 "price": 179.99,
                 "weight": 0.9,
                 "dimensions": {"length": 31, "width": 13, "height": 9},
-                "image_url": "https://images-na.ssl-images-amazon.com/images/I/71B7PXJ8%2BKL._AC_SL1500_.jpg",
+                "image_url": "https://m.media-amazon.com/images/I/518e9jsDGVL._AC_SY695_.jpg",
                 "category": "Footwear",
                 "description": "High-performance running shoes",
                 "availability": True
