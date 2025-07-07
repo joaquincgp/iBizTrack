@@ -1,6 +1,7 @@
 import random
 from typing import List, Dict, Any
-from backend.app.models.product import Product
+#from backend.app.models.product import Product
+from app.models.product import Product
 
 
 class AmazonService:

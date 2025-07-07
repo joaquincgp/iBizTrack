@@ -1,9 +1,14 @@
 from fastapi import APIRouter, HTTPException, Query
 from typing import List, Optional
-from backend.app.models.product import Product, ProductResponse, ProductSearch
-from backend.app.services.amazon_service import AmazonService
-from backend.app.services.senae_calculator import SenaeCalculator
-from backend.app.database import products_collection
+#from backend.app.models.product import Product, ProductResponse, ProductSearch
+#from backend.app.services.amazon_service import AmazonService
+#from backend.app.services.senae_calculator import SenaeCalculator
+#from backend.app.database import products_collection
+
+from app.models.product import Product, ProductResponse, ProductSearch
+from app.services.amazon_service import AmazonService
+from app.services.senae_calculator import SenaeCalculator
+from app.database import products_collection
 
 router = APIRouter()
 

@@ -1,7 +1,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from backend.app.routes import products, orders
-from backend.app.database import init_db
+#from backend.app.routes import products, orders
+#from backend.app.database import init_db
+from app.routes import products, orders
+from app.database import init_db
+
 
 app = FastAPI(title="iBizTrack - Sistema de Gestión de Importaciones", version="1.0.0")
 

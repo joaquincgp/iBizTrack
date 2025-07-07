@@ -1,12 +1,15 @@
 from motor.motor_asyncio import AsyncIOMotorClient
-from pymongo import MongoClient
+from dotenv import load_dotenv
 import os
 
-# Configuración de MongoDB
+# Cargar variables del entorno
+load_dotenv()
+
+# URL y nombre de la base
 MONGODB_URL = os.getenv("MONGODB_URL", "mongodb://localhost:27017")
 DATABASE_NAME = "ibiztrack"
 
-# Cliente asíncrono para FastAPI
+# Cliente Mongo
 client = AsyncIOMotorClient(MONGODB_URL)
 database = client[DATABASE_NAME]
 
@@ -14,10 +17,9 @@ database = client[DATABASE_NAME]
 products_collection = database.get_collection("products")
 orders_collection = database.get_collection("orders")
 
+# Crear índices
 async def init_db():
-    """Inicializar la base de datos y crear índices"""
     try:
-        # Crear índices para optimizar consultas
         await products_collection.create_index("asin")
         await orders_collection.create_index("order_number")
         print("Base de datos inicializada correctamente")
@@ -25,5 +27,4 @@ async def init_db():
         print(f"Error al inicializar la base de datos: {e}")
 
 def get_database():
-    """Obtener instancia de la base de datos"""
     return database

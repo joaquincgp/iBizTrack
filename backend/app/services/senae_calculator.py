@@ -1,5 +1,6 @@
 from typing import Dict, Any
-from backend.app.models.order import SenaeCategory
+# from backend.app.models.order import SenaeCategory
+from app.models.order import SenaeCategory
 
 
 class SenaeCalculator:
